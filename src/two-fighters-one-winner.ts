@@ -11,7 +11,7 @@ export function declareWinner(fighter1: Fighter, fighter2: Fighter, firstAttacke
     const firstAttack = firstFighter.damagePerAttack;
     const secondHealth = fighter2.health;
     const defeat = secondHealth <= firstAttack ? true : false;
-    if (defeat) return fighter1.name;
+    if (defeat) return firstFighter.name;
 
     return 'No winner';
 }
