@@ -1,4 +1,10 @@
 export class Fighter {
+    isDead() {
+        return this.health < 0;
+    }
+    hit(damagePerAttack: number) {
+        this.health -= damagePerAttack;
+    }
     constructor(
         public name: string,
         public health: number,
@@ -7,33 +13,13 @@ export class Fighter {
 }
 
 export function declareWinner(fighter1: Fighter, fighter2: Fighter, firstAttacker: string): string {
-    const firstFighter = fighter1.name === firstAttacker ? fighter1 : fighter2;
-    const firstAttack = firstFighter.damagePerAttack;
-    let firstHealth = firstFighter.health;
-
+    let firstFighter = fighter1.name === firstAttacker ? fighter1 : fighter2;
     const secondFighter = fighter1.name === firstAttacker ? fighter1 : fighter2;
-    const secondAttack = fighter2.damagePerAttack;
-    let secondHealth = fighter2.health;
 
-    secondHealth -= firstAttack;
-    if (secondHealth < 0) {
-        return firstFighter.name;
+    while (!firstFighter.isDead() && !secondFighter.isDead()) {
+        firstFighter.hit(secondFighter.damagePerAttack);
+        firstFighter = secondFighter;
     }
-
-    firstHealth -= secondAttack;
-    if (firstHealth < 0) {
-        return secondFighter.name;
-    }
-
-    secondHealth -= firstAttack;
-    if (secondHealth < 0) {
-        return firstFighter.name;
-    }
-
-    firstHealth -= secondAttack;
-    if (firstHealth < 0) {
-        return secondFighter.name;
-    }
-
-    return 'No winner';
+    if (firstFighter.isDead()) return secondFighter.name;
+    return firstFighter.name;
 }
