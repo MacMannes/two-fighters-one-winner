@@ -1,11 +1,17 @@
 export class Fighter {
     constructor(
-        private name: string,
-        private health: number,
-        private damagePerAttack: number,
+        public name: string,
+        public health: number,
+        public damagePerAttack: number,
     ) {}
 }
 
 export function declareWinner(fighter1: Fighter, fighter2: Fighter, firstAttacker: string): string {
-    return 'Lew';
+    const firstFighter = fighter1.name === firstAttacker ? fighter1 : fighter2;
+    const firstAttack = firstFighter.damagePerAttack;
+    const secondHealth = fighter2.health;
+    const defeat = secondHealth <= firstAttack ? true : false;
+    if (defeat) return fighter1.name;
+
+    return 'No winner';
 }
