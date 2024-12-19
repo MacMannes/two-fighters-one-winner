@@ -1,18 +1,46 @@
 # Two Fighters One Winner
 
-## Unit tests
+Create a function that returns the name of the winner in a fight between two fighters.
 
-Run the unit test with this command:
+Each fighter takes turns attacking the other and whoever kills the other first is victorious. Death is defined as having health <= 0.
 
-```shell
-npm run test
+Each fighter will be a Fighter object/instance. See the Fighter class below in your chosen language.
+
+Both health and damagePerAttack (damage_per_attack for python) will be integers larger than 0. You can mutate the Fighter objects.
+
+Your function also receives a third argument, a string, with the name of the fighter that attacks first.
+
+## Example
+
+```python
+declare_winner(Fighter("Lew", 10, 2), Fighter("Harry", 5, 4), "Lew") => "Lew"
+
+  Lew attacks Harry; Harry now has 3 health.
+  Harry attacks Lew; Lew now has 6 health.
+  Lew attacks Harry; Harry now has 1 health.
+  Harry attacks Lew; Lew now has 2 health.
+  Lew attacks Harry: Harry now has -1 health and is dead. Lew wins.
 ```
 
-## Coverage of unit tests
+## Test Plan
 
-You can check the code coverage and view the html results by running this command:
+### Test case 1
 
-```shell
-npm run test:coverage && open coverage/index.html
+fighter1 10,10
+fighter2, 2,2
 
-```
+Fighter 1 wins in 1 turn
+
+### Test case 2
+
+fighter1 ,10 ,5
+fighter2, 9, 2
+
+fighter1 wins in 3 turns
+
+### Test case 3
+
+fighter1 ,10 ,5
+fighter2, 9, 2
+
+fighter1 wins in 3 turns
