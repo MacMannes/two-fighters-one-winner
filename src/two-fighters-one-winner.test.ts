@@ -19,4 +19,13 @@ describe('Two Fighters One Winner', () => {
 
         expect(winner).toBe('Harry');
     });
+
+    it('Fighter 1 wins in 3 turns', () => {
+        const fighter1 = new Fighter('Lew', 10, 5);
+        const fighter2 = new Fighter('Harry', 9, 2);
+
+        const winner = declareWinner(fighter1, fighter2, 'Lew');
+
+        expect(winner).toBe('Lew');
+    });
 });
